@@ -57,7 +57,15 @@ namespace OkulAppSube1BIL
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
             var obl = new OgrenciBL();
-            obl.OgrenciGuncelle(new Ogrenci { Ad = txtAd.Text.Trim(), Soyad = txtSoyad.Text.Trim(), Numara = txtNumara.Text.Trim(), Ogrenciid = Ogrenciid });
+            bool guncellemeBasarili = obl.OgrenciGuncelle(new Ogrenci { Ad = txtAd.Text.Trim(), Soyad = txtSoyad.Text.Trim(), Numara = txtNumara.Text.Trim(), Ogrenciid = Ogrenciid });
+            if (guncellemeBasarili)
+            {
+                MessageBox.Show("Öğrenci bilgisi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Öğrenci bilgisi güncelleme sırasında bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSil_Click(object sender, EventArgs e)
