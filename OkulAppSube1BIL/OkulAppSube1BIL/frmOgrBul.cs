@@ -25,7 +25,9 @@ namespace OkulAppSube1BIL
 
         private void btnBul_Click(object sender, EventArgs e)
         {
-            var obl = new OgrenciBL();
+            try
+            {
+                var obl = new OgrenciBL();
             Ogrenci ogr = obl.OgrenciBul(txtOgrNo.Text.Trim());
             if (ogr!=null)
             {
@@ -33,15 +35,20 @@ namespace OkulAppSube1BIL
                 frm.txtSoyad.Text = ogr.Soyad;
                 frm.txtNumara.Text = ogr.Numara;
                 frm.Ogrenciid = ogr.Ogrenciid;
+                    frm.ButtonKontrol = 1;
                 this.Close();
             }
             else
             {
                 MessageBox.Show("Kayıt bulunamadı.");
             }
-
-
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata oluştu :" + ex.ToString());
+            }
+
+}
     }
 }
 

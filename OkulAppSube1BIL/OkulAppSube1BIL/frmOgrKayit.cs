@@ -15,6 +15,7 @@ namespace OkulAppSube1BIL
 {
     public partial class frmOgrKayit : Form
     {
+        public int ButtonKontrol; // ise Bul ve Kaydet Aktif, Güncelle ve sil Pasif
 
         public int Ogrenciid { get; set; }
         public frmOgrKayit()
@@ -24,11 +25,18 @@ namespace OkulAppSube1BIL
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            if (txtAd.Text.Length <1 && txtSoyad.Text.Length <1 && txtNumara.Text.Length <1)
+            {
+                MessageBox.Show("Alan boş bırakılamaz.");
+                return;
+            }
             try
             {
                 var obl = new OgrenciBL();
                 bool sonuc = obl.OgrenciEkle(new Ogrenci { Ad = txtAd.Text.Trim(), Soyad = txtSoyad.Text.Trim(), Numara = txtNumara.Text.Trim() });
                 MessageBox.Show(sonuc ? "Ekleme Başarılı!" : "Ekleme Başarısız!!");
+                ButtonKontrol = 1;
+                ButtonDurum();
             }
             catch (SqlException ex)
             {
@@ -50,28 +58,80 @@ namespace OkulAppSube1BIL
 
         private void btnBul_Click(object sender, EventArgs e)
         {
+            ButtonKontrol = 0;
             frmOgrBul frm = new frmOgrBul(this);
-            frm.Show();
+            frm.ShowDialog();
+            ButtonDurum();
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
-            var obl = new OgrenciBL();
-            bool guncellemeBasarili = obl.OgrenciGuncelle(new Ogrenci { Ad = txtAd.Text.Trim(), Soyad = txtSoyad.Text.Trim(), Numara = txtNumara.Text.Trim(), Ogrenciid = Ogrenciid });
-            if (guncellemeBasarili)
+            try
             {
-                MessageBox.Show("Öğrenci bilgisi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var obl = new OgrenciBL();
+                bool guncellemeBasarili = obl.OgrenciGuncelle(new Ogrenci { Ad = txtAd.Text.Trim(), Soyad = txtSoyad.Text.Trim(), Numara = txtNumara.Text.Trim(), Ogrenciid = Ogrenciid });
+                if (guncellemeBasarili)
+                {
+                    MessageBox.Show("Öğrenci bilgisi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Öğrenci bilgisi güncelleme sırasında bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Öğrenci bilgisi güncelleme sırasında bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hata oluştu :" + ex.ToString());
             }
+
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            var obl = new OgrenciBL();
-            obl.OgrenciSil(Ogrenciid);
+            try
+            {
+                var obl = new OgrenciBL();
+            bool silmeBasarili = obl.OgrenciSil(Ogrenciid);
+              if (silmeBasarili)
+            {
+                MessageBox.Show("Öğrenci bilgisi başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Silme sırasında bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata oluştu :" + ex.ToString());
+            }
+        }
+
+        private void grpOgrenci_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmOgrKayit_Load(object sender, EventArgs e)
+        {
+            ButtonKontrol = 0;
+            ButtonDurum();
+
+        }
+
+        public void ButtonDurum()
+        {
+            if (ButtonKontrol == 0)
+            {
+                btnGuncelle.Enabled = false;
+                btnSil.Enabled = false;
+            }
+            else if (ButtonKontrol == 1)
+            {
+                btnGuncelle.Enabled = true;
+                btnSil.Enabled = true;
+            }
+
         }
     }
 

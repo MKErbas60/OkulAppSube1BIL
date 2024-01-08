@@ -56,6 +56,7 @@
             this.grpOgrenci.TabIndex = 0;
             this.grpOgrenci.TabStop = false;
             this.grpOgrenci.Text = "Öğrenci Bilgileri";
+            this.grpOgrenci.Enter += new System.EventHandler(this.grpOgrenci_Enter);
             // 
             // lblNumara
             // 
@@ -156,7 +157,9 @@
             this.Controls.Add(this.btnKaydet);
             this.Controls.Add(this.grpOgrenci);
             this.Name = "frmOgrKayit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Öğrenci Kayıt İşlemleri";
+            this.Load += new System.EventHandler(this.frmOgrKayit_Load);
             this.grpOgrenci.ResumeLayout(false);
             this.grpOgrenci.PerformLayout();
             this.ResumeLayout(false);

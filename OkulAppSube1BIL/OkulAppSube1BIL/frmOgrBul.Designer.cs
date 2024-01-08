@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.grpBul = new System.Windows.Forms.GroupBox();
-            this.txtOgrNo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnBul = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOgrNo = new System.Windows.Forms.TextBox();
             this.grpBul.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,22 +47,6 @@
             this.grpBul.TabStop = false;
             this.grpBul.Text = "Öğrenci Bul";
             // 
-            // txtOgrNo
-            // 
-            this.txtOgrNo.Location = new System.Drawing.Point(79, 68);
-            this.txtOgrNo.Name = "txtOgrNo";
-            this.txtOgrNo.Size = new System.Drawing.Size(100, 20);
-            this.txtOgrNo.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Öğrenci Numarası";
-            // 
             // btnBul
             // 
             this.btnBul.Location = new System.Drawing.Point(79, 103);
@@ -73,6 +57,22 @@
             this.btnBul.UseVisualStyleBackColor = true;
             this.btnBul.Click += new System.EventHandler(this.btnBul_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(76, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Öğrenci Numarası";
+            // 
+            // txtOgrNo
+            // 
+            this.txtOgrNo.Location = new System.Drawing.Point(79, 68);
+            this.txtOgrNo.Name = "txtOgrNo";
+            this.txtOgrNo.Size = new System.Drawing.Size(100, 20);
+            this.txtOgrNo.TabIndex = 0;
+            // 
             // frmOgrBul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -80,6 +80,7 @@
             this.ClientSize = new System.Drawing.Size(295, 201);
             this.Controls.Add(this.grpBul);
             this.Name = "frmOgrBul";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmOgrBul";
             this.grpBul.ResumeLayout(false);
             this.grpBul.PerformLayout();
